@@ -1,0 +1,27 @@
+create database college_id;
+use college_id;
+create table students(std_id int primary key auto_increment, std_name varchar(100) not null, email varchar(50) unique not null, age int check(age>=18),city varchar(50) default 'Kochi');
+insert into students(std_name, email, age, city) values("Keerthi","keerthi@gmail.com",24,"Kollam"),("Riya","Riya@gmail.com",25,"Kochi"),("Dhiya","Dhiya@eldho",22,"Kochi"),("Sooraj","Sooraj@gmail.com",28,"Trivandrum"),("Anu","Anugraha@gmail.com",26,"Kannur");
+select * from students;
+insert into students(email,age,city) values("gokul@gmail.com",27,"Trivandrum");
+insert into students(std_name,email,age,city) values("keerthi","keerthi@gmail.com",26,"Kollam");
+insert into students(std_name, email,age,city) values("Riya","Riya2002@gmail.com",17,"Kochi");
+insert into students(std_name,email,age) values("Anushma","Anushma@gmail.com",27);
+create table course(course_id int primary key auto_increment, course_name varchar(50), duration int);
+insert into course(course_name, duration) values("B.Sc",3),("MBA",2),("Data analystics",4);
+select * from course;
+alter table course add dept varchar(50);
+alter table course drop column duration;
+create table enrollment(emt_id int primary key auto_increment, std_id int not null, course_id int not null, foreign key(std_id) references students(std_id), foreign key(course_id) references course(course_id));
+insert into enrollment(std_id, course_id) values(1,1),(1,2),(2,1),(3,3);
+select * from enrollment;
+insert into enrollment(std_id,course_id) values(10,5);
+insert into enrollment(std_id,course_id) values(2,5);
+select std_name, age from students;
+SET FOREIGN_KEY_CHECKS = 0;
+TRUNCATE TABLE course;
+SET FOREIGN_KEY_CHECKS = 1;
+SET FOREIGN_KEY_CHECKS = 0;
+drop TABLE course;
+SET FOREIGN_KEY_CHECKS = 1;
+
